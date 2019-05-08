@@ -51,8 +51,6 @@ class Page {
         
     }
 
-
- 
 }
 
 var page;
