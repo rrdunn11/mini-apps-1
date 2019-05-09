@@ -10,8 +10,20 @@ class App extends React.Component{
         }
     }
 
+    onCheckoutSubmit(e) {
+        e.preventDefault();
+        this.setState({
+            submittedForm: this.state.submittedForm+1,
+        });
+    }
+
     onForm1Submit(e) {
         e.preventDefault();
+        var data = $("#firstForm").val();
+        console.log(data)
+        $('#firstForm').each((e) => {
+            console.log($(this))
+        })
         var nameElem = document.getElementById('name');
         var emailElem = document.getElementById('email');
         var passwordElem = document.getElementById('password');
@@ -20,7 +32,7 @@ class App extends React.Component{
             email: emailElem.value,
             password: passwordElem.value,
         };
-        console.log(this.form1Data)
+        // console.log(this.form1Data)
         this.setState({
             submittedForm: this.state.submittedForm+1,
         });
@@ -44,7 +56,7 @@ class App extends React.Component{
                 zipCode: zipCodeElem.value,
                 phoneNumber: phoneNumberElem.value,
         };
-        console.log(this.form2Data)
+        // console.log(this.form2Data)
         this.setState({
             submittedForm: this.state.submittedForm+1,
         });
@@ -62,7 +74,7 @@ class App extends React.Component{
             ccv: ccvElem.value,
             billingZipCode: billingZipCodeElem.value,
         };
-        console.log(this.form3Data);
+        // console.log(this.form3Data);
         this.setState({
             submittedForm: this.state.submittedForm+1,
         });
@@ -78,7 +90,13 @@ class App extends React.Component{
             data: allData,
             success: (result) => {
                 console.log(result);
+                this.setState({
+                    submittedForm: 0,
+                });
             },
+            error: () => {
+                console.log('Error');
+            }
         });
     };
 
@@ -86,21 +104,26 @@ class App extends React.Component{
         let comp;
         switch (this.state.submittedForm) {
             case 0:
+            comp = <Checkout 
+            onCheckoutSubmit={this.onCheckoutSubmit.bind(this)}
+                />;
+            break;
+            case 1:
             comp = <Form1 
                 onForm1Submit={this.onForm1Submit.bind(this)}
                 />;
             break;
-            case 1:
+            case 2:
             comp = <Form2 
                 onForm2Submit={this.onForm2Submit.bind(this)}
                 /> ;
             break;
-            case 2:
+            case 3:
             comp = <Form3 
                 onForm3Submit={this.onForm3Submit.bind(this)}
                 /> ;
             break;
-            case 3:
+            case 4:
             var allData = Object.assign({}, this.form1Data, this.form2Data, this.form3Data);
             comp = <Summary 
                 allData={allData}
@@ -118,13 +141,23 @@ class App extends React.Component{
     }
 }
 
+
+var Checkout = ({onCheckoutSubmit}) => (
+    <button onClick={(e) => onCheckoutSubmit(e)}>Checkout</button>
+)
+
+
+
+
+
+
 //F1 collects name, email, and password for account creation.
 
 
 var Form1 = ({onForm1Submit}) => (
     <div id="form1">
         <h2>Step 1: Sign Up</h2>
-        <form action="">
+        <form id="firstForm" action="">
             Name: <br></br>
             <input id="name" type="text"/><br></br>
             Email: <br></br>
