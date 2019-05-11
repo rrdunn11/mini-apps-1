@@ -1,0 +1,41 @@
+table, th, td {
+    border: solid 1px
+}
+
+th, td {
+    width: 80px;
+    height: 80px;
+    table-layout: fixed;
+}
+
+.X {
+    background: url(https://banner2.kisspng.com/20180501/vxw/kisspng-tic-tac-toe-oxo-holiday-tic-tac-toe-game-blue-cross-5ae92d39cb69a5.5573938915252309058332.jpg);
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: text-bottom;
+    font-size: 10px;
+}
+
+.O {
+    
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9XtTxiutaKxBRrHXW5Tb4cbONWyhWKNuD5J4Ywos1yTBR9HcG);
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: text-bottom;
+    font-size: 10px;
+}
+
+table {
+    margin: auto;
+}
+
+h1 {
+    text-align: center
+}
+
+#reset {
+    display: flex;
+    justify-content: center
+}
